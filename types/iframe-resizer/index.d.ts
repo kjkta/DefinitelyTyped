@@ -12,10 +12,7 @@ declare namespace iframeResizer {
 
     resize(): void;
 
-    sendMessage(
-      message: any,
-      targetOrigin?: string
-    ): void;
+    sendMessage(message: any, targetOrigin?: string): void;
   }
 
   // tslint:disable-next-line:interface-name
@@ -93,11 +90,11 @@ declare namespace iframeResizer {
      * can be resized independently of the browser window. Selecting this value can cause issues with some
      * height calculation methods on mobile devices.
      */
-    resizeFrom?: 'parent' | 'child';
+    resizeFrom?: "parent" | "child";
     /**
      * Enable scroll bars in iFrame.
      */
-    scrolling?: boolean | 'auto';
+    scrolling?: boolean | "auto";
     /**
      * Resize iFrame to content height.
      */
@@ -173,11 +170,27 @@ declare namespace iframeResizer {
     widthCalculationMethod?: WidthCalculationMethod | (() => number);
   }
 
-  type HeightCalculationMethod = 'bodyOffset' | 'bodyScroll' | 'documentElementOffset' | 'documentElementScroll' |
-    'max' | 'min' | 'grow' | 'lowestElement' | 'taggedElement';
+  type HeightCalculationMethod =
+    | "bodyOffset"
+    | "bodyScroll"
+    | "documentElementOffset"
+    | "documentElementScroll"
+    | "max"
+    | "min"
+    | "grow"
+    | "lowestElement"
+    | "taggedElement";
 
-  type WidthCalculationMethod = 'bodyOffset' | 'bodyScroll' | 'documentElementOffset' | 'documentElementScroll' |
-    'max' | 'min' | 'scroll' | 'rightMostElement' | 'taggedElement';
+  type WidthCalculationMethod =
+    | "bodyOffset"
+    | "bodyScroll"
+    | "documentElementOffset"
+    | "documentElementScroll"
+    | "max"
+    | "min"
+    | "scroll"
+    | "rightMostElement"
+    | "taggedElement";
 
   // tslint:disable-next-line:interface-name
   interface IFramePage {
@@ -208,28 +221,19 @@ declare namespace iframeResizer {
     /**
      * Scroll the parent page to the coordinates x and y
      */
-    scrollTo(
-      x: number,
-      y: number
-    ): void;
+    scrollTo(x: number, y: number): void;
 
     /**
      * Scroll the parent page to the coordinates x and y relative to the position of the iFrame.
      */
-    scrollToOffset(
-      x: number,
-      y: number
-    ): void;
+    scrollToOffset(x: number, y: number): void;
 
     /**
      * Send data to the containing page, message can be any data type that can be serialized into JSON. The `targetOrigin`
      * option is used to restrict where the message is sent to; to stop an attacker mimicking your parent page.
      * See the MDN documentation on postMessage for more details.
      */
-    sendMessage(
-      message: any,
-      targetOrigin?: string
-    ): void;
+    sendMessage(message: any, targetOrigin?: string): void;
 
     /**
      * Change the method use to workout the height of the iFrame.
@@ -250,10 +254,7 @@ declare namespace iframeResizer {
      * Manually force iFrame to resize. To use passed arguments you need first to disable the `autoResize` option to
      * prevent auto resizing and enable the `sizeWidth` option if you wish to set the width.
      */
-    size(
-      customHeight?: string,
-      customWidth?: string
-    ): void;
+    size(customHeight?: string, customWidth?: string): void;
   }
 
   interface PageInfo {
@@ -312,6 +313,12 @@ declare namespace iframeResizer {
   }
 }
 
-declare function iframeResizer(options: iframeResizer.IFrameOptions, target: string | HTMLElement): iframeResizer.IFrameComponent[];
-export = iframeResizer;
-export as namespace iframeResizer;
+type module = {
+  iframeResizer: (
+    options: iframeResizer.IFrameOptions,
+    target: string | HTMLElement
+  ) => iframeResizer.IFrameComponent[];
+};
+
+export = module;
+    
